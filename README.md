@@ -1,111 +1,141 @@
 # Nexodocs — Sistema de Gestión Documental
 
-Este proyecto es una interfaz web para gestionar documentos de empresas. Incluye un dashboard multitenant, módulos de documentos, expedientes, workflows, usuarios, reportes y configuración.
+Nexodocs es una aplicación web para organizar y controlar documentos de empresas.
 
-La aplicación está construida con **Next.js**, **React**, **TypeScript**, **Tailwind CSS** y componentes de **shadcn/ui**.
+Esta versión es un prototipo visual. Incluye una pantalla principal con módulos para documentos, expedientes, flujos de trabajo, usuarios, reportes y configuración.
 
-## Requisitos
+## 1. Qué necesitas instalar
 
-Antes de comenzar, instala estas herramientas:
+Antes de abrir el proyecto, instala estas tres herramientas:
 
-1. **Node.js**, versión 20 o superior: [nodejs.org](https://nodejs.org)
-2. **VS Code**, para abrir y editar el proyecto: [code.visualstudio.com](https://code.visualstudio.com)
-3. **pnpm**, que es el gestor de paquetes usado por este proyecto.
+1. **Node.js 20 o una versión más nueva**
+   - Descarga: https://nodejs.org
+2. **Visual Studio Code**
+   - Descarga: https://code.visualstudio.com
+3. **pnpm**
+   - pnpm sirve para instalar las librerías del proyecto.
 
-Para instalar pnpm, abre una terminal y ejecuta:
+Para instalar pnpm, abre una terminal y escribe:
 
 ```bash
 npm install --global pnpm
 ```
 
-Puedes comprobar que todo está instalado escribiendo:
+Para comprobar que las herramientas funcionan, escribe:
 
 ```bash
 node --version
 pnpm --version
 ```
 
-## Cómo descargar y abrir el proyecto
+Si aparecen números de versión, la instalación está lista.
 
-1. Descarga el proyecto como ZIP desde v0 o clónalo desde GitHub.
-2. Descomprime el ZIP si lo descargaste.
-3. Abre la carpeta del proyecto con VS Code.
-4. En VS Code, abre una terminal desde **Terminal → Nueva terminal**.
+## 2. Descargar y abrir el proyecto
 
-## Instalar las librerías
+Puedes descargar el proyecto como archivo ZIP desde v0 o copiarlo desde GitHub.
 
-La primera vez que abras el proyecto, instala todas sus librerías con este comando:
+Después:
+
+1. Descomprime el archivo ZIP, si lo descargaste.
+2. Abre Visual Studio Code.
+3. Selecciona **Archivo → Abrir carpeta**.
+4. Elige la carpeta del proyecto.
+5. Abre una terminal desde **Terminal → Nueva terminal**.
+
+## 3. Instalar las librerías
+
+La primera vez, ejecuta este comando dentro de la carpeta del proyecto:
 
 ```bash
 pnpm install
 ```
 
-Este comando lee el archivo `package.json` y descarga automáticamente todo lo que necesita la aplicación.
+Este comando lee `package.json` y descarga todo lo necesario.
 
-## Ejecutar el proyecto
+Debes volver a ejecutar `pnpm install` si el proyecto cambia sus librerías o si aparece un error de dependencias.
 
-Para encender la aplicación en modo desarrollo, ejecuta:
+## 4. Encender la aplicación
+
+Para iniciar la aplicación en modo desarrollo, ejecuta:
 
 ```bash
 pnpm dev
 ```
 
-Después, abre este enlace en tu navegador:
+Cuando aparezca el mensaje de inicio, abre este enlace en tu navegador:
 
-[http://localhost:3000](http://localhost:3000)
+http://localhost:3000
 
-Para detener la aplicación, vuelve a la terminal y presiona `Ctrl + C`.
+La aplicación se actualizará automáticamente cuando guardes cambios en el código.
 
-## Comandos importantes
+Para apagarla, vuelve a la terminal y presiona:
 
-| Comando | Para qué sirve |
+```text
+Ctrl + C
+```
+
+## 5. Comandos importantes
+
+| Comando | Qué hace |
 | --- | --- |
-| `pnpm install` | Instala las librerías del proyecto. |
-| `pnpm dev` | Inicia la aplicación para trabajar y ver cambios. |
-| `pnpm build` | Comprueba y prepara la aplicación para producción. |
-| `pnpm start` | Ejecuta la versión preparada para producción. |
+| `pnpm install` | Instala las librerías. |
+| `pnpm dev` | Enciende la aplicación para trabajar en ella. |
+| `pnpm build` | Comprueba que la aplicación pueda prepararse para publicar. |
+| `pnpm start` | Enciende la versión preparada para publicar. |
 
-## Librerías principales
+## 6. Librerías y herramientas usadas
 
-- **Next.js 16:** framework principal de la aplicación web.
-- **React 19:** permite crear componentes y pantallas interactivas.
-- **TypeScript:** ayuda a escribir código más seguro y ordenado.
-- **Tailwind CSS 4:** permite diseñar la interfaz rápidamente.
-- **shadcn/ui:** componentes visuales accesibles para botones, tarjetas y navegación.
-- **Lucide React:** iconos usados en el dashboard.
-- **Vercel Analytics:** medición básica del uso de la aplicación.
+- **Next.js 16:** estructura principal de la aplicación web.
+- **React 19:** permite crear pantallas y elementos interactivos.
+- **TypeScript:** ayuda a detectar errores en el código.
+- **Tailwind CSS 4:** se utiliza para diseñar la interfaz.
+- **shadcn/ui:** ofrece componentes visuales como botones, tarjetas y menús.
+- **Lucide React:** proporciona los iconos del sistema.
+- **Vercel Analytics:** permite medir el uso de la aplicación.
 
-## Dónde empezar a modificar
+No necesitas instalar cada librería manualmente. El comando `pnpm install` las instala todas.
 
-- `app/page.tsx`: pantalla principal y módulos del dashboard.
-- `app/globals.css`: colores, estilos generales y diseño responsive.
-- `app/layout.tsx`: estructura general y metadatos de la aplicación.
-- `package.json`: librerías y comandos disponibles.
+## 7. Archivos principales
 
-## Solución rápida de problemas
+- `app/page.tsx`: contiene la pantalla principal y los módulos del panel.
+- `app/globals.css`: contiene los colores, tamaños y estilos generales.
+- `app/layout.tsx`: contiene la estructura general y la información de la página.
+- `package.json`: contiene las librerías y los comandos del proyecto.
 
-Si aparece un error al ejecutar el proyecto, prueba esto:
+## 8. Si algo no funciona
+
+Primero, detén la aplicación con `Ctrl + C` y ejecuta:
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Si el puerto 3000 está ocupado, cierra la aplicación que lo está usando o inicia Next.js en otro puerto:
+Si el puerto 3000 ya está ocupado, utiliza otro puerto:
 
 ```bash
 pnpm dev -- --port 3001
 ```
 
-En ese caso, abre [http://localhost:3001](http://localhost:3001).
+Después abre:
 
-## Nota sobre Angular y Flutter
+http://localhost:3001
 
-La versión actual es un prototipo frontend realizado con Next.js y React. La estructura visual sirve como referencia para una futura implementación del sistema en Angular para web y Flutter para aplicaciones móviles.
+Si sigues teniendo problemas, revisa que estés situado dentro de la carpeta correcta del proyecto y que Node.js tenga la versión 20 o superior.
 
-## Continuar trabajando con v0
+## 9. Angular y Flutter
 
-Este repositorio está vinculado a un proyecto de [v0](https://v0.app). Puedes continuar solicitando cambios desde el siguiente enlace:
+La versión actual es un prototipo realizado con Next.js y React.
 
-[Continuar trabajando en v0](https://v0.app/chat/projects/prj_IBhMxF0QStaLOWwLEdOUX9zFCQlc)
+La idea del proyecto es utilizar esta interfaz como referencia para crear posteriormente:
 
+- Una aplicación web con Angular.
+- Una aplicación móvil para Android y iPhone con Flutter.
+- Un sistema multitenant, donde varias empresas puedan utilizar la plataforma con sus datos separados.
+- Un asistente conversacional con inteligencia artificial.
+
+## 10. Continuar trabajando en v0
+
+Este proyecto está conectado a v0. Puedes seguir solicitando cambios desde aquí:
+
+https://v0.app/chat/projects/prj_IBhMxF0QStaLOWwLEdOUX9zFCQlc
