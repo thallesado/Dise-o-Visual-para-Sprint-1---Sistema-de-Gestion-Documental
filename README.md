@@ -111,3 +111,40 @@ Sigue pendiente implementar un backend. Por eso:
 - Las acciones muestran comportamiento de demo.
 - Los documentos, usuarios, workflows, auditoria y tenants no se guardan.
 - El frontend no establece contexto `tenant_id` ni `user_id` en PostgreSQL.
+
+## 9. Agentes del proyecto
+
+Los agentes personalizados del repositorio se encuentran en
+`.github/agents/`. Cada uno tiene un alcance específico para reducir solapamientos,
+mantener el contexto del proyecto y usar la asistencia de IA de forma organizada.
+
+| Agente | Trabajo principal |
+| --- | --- |
+| `nexodocs-coordinador` | Entiende el objetivo general, divide tareas por responsabilidad, deriva el trabajo al agente adecuado, evita que varios agentes modifiquen los mismos archivos e integra las validaciones. |
+| `nexodocs-frontend-angular` | Mantiene el frontend Angular: componentes standalone, rutas, shell, sidebar, estilos, responsive, estado local de la demo, TypeScript y accesibilidad. |
+| `nexodocs-base-datos` | Mantiene PostgreSQL, migraciones nuevas, RLS, RBAC, aislamiento multitenant, integridad de versiones, auditoría y pruebas SQL. No modifica migraciones ya aplicadas, especialmente `004_saas_hardening`. |
+| `nexodocs-documentacion` | Actualiza `README.md`, `docs/ARQUITECTURA.md`, `docs/CONTEXTO_PROYECTO.md` y las decisiones técnicas usando únicamente capacidades comprobadas en el código. |
+| `nexodocs-revisor` | Revisa cambios existentes sin editar archivos: lógica, imports, rutas, tipos, regresiones, separación de responsabilidades y cumplimiento de las reglas del proyecto. |
+| `nexodocs-pruebas` | Ejecuta las validaciones existentes, como `pnpm typecheck`, `pnpm test`, `pnpm build` y las pruebas PostgreSQL cuando corresponda. Reporta errores sin corregirlos automáticamente. |
+| `nexodocs-explorador` | Inspecciona una solicitud sin modificar archivos, localiza el área afectada, identifica riesgos y recomienda qué agente debe realizar el trabajo. |
+
+### Flujo recomendado
+
+Para una tarea que afecte varias áreas:
+
+```text
+nexodocs-explorador
+        ↓
+nexodocs-coordinador
+        ↓
+agente especializado
+        ↓
+nexodocs-revisor
+        ↓
+nexodocs-pruebas
+```
+
+Para tareas pequeñas se puede utilizar directamente el agente especializado.
+Los agentes no sustituyen la revisión humana y no deben asumir que existe
+backend, autenticación o persistencia real mientras esas partes no estén
+implementadas.
