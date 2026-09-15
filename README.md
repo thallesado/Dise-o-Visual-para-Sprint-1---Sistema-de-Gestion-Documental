@@ -2,15 +2,18 @@
 
 Nexodocs es una aplicación web para organizar y controlar documentos de empresas.
 
-Esta versión es un prototipo visual. Incluye módulos para documentos, expedientes, flujos de trabajo, usuarios, reportes y configuración.
+Esta versión es un prototipo visual. Incluye una pantalla principal con módulos para documentos, expedientes, flujos de trabajo, usuarios, reportes y configuración.
 
 ## 1. Qué necesitas instalar
 
-Antes de abrir el proyecto, instala estas herramientas:
+Antes de abrir el proyecto, instala estas tres herramientas:
 
-1. **Node.js 20 o una versión más nueva** — https://nodejs.org
-2. **Visual Studio Code** — https://code.visualstudio.com
-3. **pnpm**, el instalador de librerías del proyecto.
+1. **Node.js 20 o una versión más nueva**
+   - Descarga: https://nodejs.org
+2. **Visual Studio Code**
+   - Descarga: https://code.visualstudio.com
+3. **pnpm**
+   - pnpm sirve para instalar las librerías del proyecto.
 
 Para instalar pnpm, abre una terminal y escribe:
 
@@ -18,20 +21,22 @@ Para instalar pnpm, abre una terminal y escribe:
 npm install --global pnpm
 ```
 
-Comprueba que todo funciona:
+Para comprobar que las herramientas funcionan, escribe:
 
 ```bash
 node --version
 pnpm --version
 ```
 
-Si aparecen números de versión, estás listo.
+Si aparecen números de versión, la instalación está lista.
 
 ## 2. Descargar y abrir el proyecto
 
-Puedes descargar el proyecto como ZIP desde v0 o copiarlo desde GitHub.
+Puedes descargar el proyecto como archivo ZIP desde v0 o copiarlo desde GitHub.
 
-1. Descomprime el ZIP, si lo descargaste.
+Después:
+
+1. Descomprime el archivo ZIP, si lo descargaste.
 2. Abre Visual Studio Code.
 3. Selecciona **Archivo → Abrir carpeta**.
 4. Elige la carpeta del proyecto.
@@ -39,27 +44,35 @@ Puedes descargar el proyecto como ZIP desde v0 o copiarlo desde GitHub.
 
 ## 3. Instalar las librerías
 
-Dentro de la carpeta del proyecto, ejecuta:
+La primera vez, ejecuta este comando dentro de la carpeta del proyecto:
 
 ```bash
 pnpm install
 ```
 
-Este comando lee `package.json` y descarga todo lo necesario. No tienes que instalar cada librería por separado.
+Este comando lee `package.json` y descarga todo lo necesario.
+
+Debes volver a ejecutar `pnpm install` si el proyecto cambia sus librerías o si aparece un error de dependencias.
 
 ## 4. Encender la aplicación
 
-Ejecuta:
+Para iniciar la aplicación en modo desarrollo, ejecuta:
 
 ```bash
 pnpm dev
 ```
 
-Cuando aparezca el mensaje de inicio, abre en tu navegador:
+Cuando aparezca el mensaje de inicio, abre este enlace en tu navegador:
 
 http://localhost:3000
 
-La aplicación se actualizará automáticamente cuando guardes cambios. Para apagarla, vuelve a la terminal y presiona `Ctrl + C`.
+La aplicación se actualizará automáticamente cuando guardes cambios en el código.
+
+Para apagarla, vuelve a la terminal y presiona:
+
+```text
+Ctrl + C
+```
 
 ## 5. Comandos importantes
 
@@ -80,6 +93,8 @@ La aplicación se actualizará automáticamente cuando guardes cambios. Para apa
 - **Lucide React:** proporciona los iconos del sistema.
 - **Vercel Analytics:** permite medir el uso de la aplicación.
 
+No necesitas instalar cada librería manualmente. El comando `pnpm install` las instala todas.
+
 ## 7. Archivos principales
 
 - `app/page.tsx`: contiene la pantalla principal y los módulos del panel.
@@ -96,23 +111,27 @@ pnpm install
 pnpm dev
 ```
 
-Si el puerto 3000 está ocupado, utiliza otro:
+Si el puerto 3000 ya está ocupado, utiliza otro puerto:
 
 ```bash
 pnpm dev -- --port 3001
 ```
 
-Después abre http://localhost:3001.
+Después abre:
 
-Si sigues teniendo problemas, comprueba que estés dentro de la carpeta correcta y que Node.js sea versión 20 o superior.
+http://localhost:3001
+
+Si sigues teniendo problemas, revisa que estés situado dentro de la carpeta correcta del proyecto y que Node.js tenga la versión 20 o superior.
 
 ## 9. Angular y Flutter
 
-La versión actual es un prototipo realizado con Next.js y React. La interfaz servirá como referencia para crear posteriormente:
+La versión actual es un prototipo realizado con Next.js y React.
+
+La idea del proyecto es utilizar esta interfaz como referencia para crear posteriormente:
 
 - Una aplicación web con Angular.
 - Una aplicación móvil para Android y iPhone con Flutter.
-- Un sistema multitenant, donde cada empresa tenga sus datos separados.
+- Un sistema multitenant, donde varias empresas puedan utilizar la plataforma con sus datos separados.
 - Un asistente conversacional con inteligencia artificial.
 
 ## 10. Continuar trabajando en v0
