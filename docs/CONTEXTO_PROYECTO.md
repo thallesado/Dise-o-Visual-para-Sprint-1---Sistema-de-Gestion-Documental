@@ -1,7 +1,10 @@
-> Actualización de estructura (2026-09-15): la interfaz Next.js está en `frontend/`.
-> Cada sección tiene una URL y un `page.tsx` en `frontend/src/app/(workspace)/`;
-> las vistas reutilizables están en `frontend/src/features/`. Consulta
-> [la arquitectura y el mapa de pantallas](ARQUITECTURA.md). Los comandos
+> Actualizacion de migracion (2026-09-15): la interfaz activa fue migrada a Angular 20 LTS en `frontend/`.
+> Las rutas se definen en `frontend/src/app/core/routes/app.routes.ts` a partir de `frontend/src/app/core/data/nexodocs-data.ts`.
+> El frontend sigue siendo una demo visual sin backend ni persistencia; no conecta el navegador a PostgreSQL.
+> Las referencias historicas a Next.js, React, `page.tsx` y `features/` describen la estructura anterior.
+> Actualización de estructura (2026-09-15): la interfaz activa está en `frontend/` y se organiza por capas con shell, core y features.
+> Cada sección tiene una URL y se compone desde `frontend/src/app/features/*/`; la shell queda en `frontend/src/app/shell/`.
+> Consulta [la arquitectura y el mapa de pantallas](ARQUITECTURA.md). Los comandos
 > `pnpm dev`, `pnpm build`, `pnpm typecheck` y `pnpm test` se ejecutan desde la raíz.
 > Las referencias a `app/page.tsx` y `components/module-content.tsx` del documento
 > original describen la estructura anterior; el frontend sigue siendo una demo.

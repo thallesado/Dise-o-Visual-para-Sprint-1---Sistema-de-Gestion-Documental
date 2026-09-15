@@ -4,5 +4,10 @@ packages:
 pmOnFail: ignore
 
 minimumReleaseAgeExclude:
-  - '@next/*'
-  - next
+  - '@angular/*'
+
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true

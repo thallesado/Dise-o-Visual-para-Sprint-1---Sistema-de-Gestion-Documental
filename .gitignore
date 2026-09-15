@@ -13,6 +13,8 @@ __v0_jsx-dev-runtime.ts
 # Common ignores
 node_modules
 .next/
+.angular/
+dist/
 .DS_Store
 
 # Local database dumps can contain private data.

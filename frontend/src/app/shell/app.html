@@ -1,0 +1,153 @@
+@if (!isWorkspace()) {
+  <router-outlet></router-outlet>
+} @else {
+  <main class="shell">
+    <aside class="sidebar">
+      <a routerLink="/" class="brand" aria-label="NexoDocs, ir al inicio">
+        <span class="brand-mark" aria-hidden="true"><i></i></span>
+        <span class="brand-copy">
+          <strong>NexoDocs</strong>
+          <small>Gestión documental</small>
+        </span>
+      </a>
+
+      <div class="tenant-box">
+        <small>Organización activa</small>
+        <div class="tenant-name"><b>Acme Consulting</b><span aria-hidden="true">⌄</span></div>
+        <label class="role-switcher">
+          <span>Rol visual</span>
+          <select [value]="role()" (change)="role.set($any($event.target).value)">
+            @for (item of roles; track item) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navegación principal">
+        @for (section of availableSections(); track section.title) {
+          <p class="nav-section">{{ section.title }}</p>
+          @for (item of section.items; track item.label) {
+            <div class="nav-group">
+              <a
+                class="nav-parent"
+                [class.active]="isActiveItem(item.label)"
+                [routerLink]="item.children[0].href"
+                (click)="openNav(item.label)"
+              >
+                <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+                <b>{{ item.label }}</b>
+                @if (unreadCount(item.label)) {
+                  <em class="nav-badge">{{ unreadCount(item.label) }}</em>
+                }
+              </a>
+              <button
+                type="button"
+                class="nav-toggle"
+                [attr.aria-label]="(isExpanded(item.label) ? 'Contraer ' : 'Expandir ') + item.label"
+                [attr.aria-expanded]="isExpanded(item.label)"
+                (click)="toggleNav(item.label)"
+              >{{ isExpanded(item.label) ? '⌃' : '⌄' }}</button>
+            </div>
+            @if (isExpanded(item.label)) {
+              <div class="nav-children">
+                @for (child of item.children; track child.href) {
+                  <a
+                    [routerLink]="child.href"
+                    [class.active]="isActiveChild(child.href)"
+                    [attr.aria-current]="isActiveChild(child.href) ? 'page' : null"
+                    (click)="openNav(item.label)"
+                  >{{ child.label }}</a>
+                }
+              </div>
+            }
+          }
+        }
+      </nav>
+
+      <div class="storage">
+        <div class="storage-heading"><span>Almacenamiento</span><b>68%</b></div>
+        <div class="storage-bar"><i></i></div>
+        <small>6.8 GB de 10 GB utilizados</small>
+      </div>
+
+      <div class="user-footer">
+        <span class="avatar">LM</span>
+        <div><b>Laura Martinez</b><small>Administradora</small></div>
+        <button type="button" aria-label="Opciones de usuario">⌄</button>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div class="mobile-brand">
+          <button type="button" class="menu-button" (click)="mobileNavOpen.set(!mobileNavOpen())" aria-label="Abrir menú">☰</button>
+          <a routerLink="/" class="brand compact-brand">
+            <span class="brand-mark" aria-hidden="true"><i></i></span>
+            <strong>NexoDocs</strong>
+          </a>
+        </div>
+        <label class="search">
+          <span aria-hidden="true">⌕</span>
+          <input aria-label="Buscar en NexoDocs" placeholder="Buscar documentos, expedientes o usuarios..." />
+        </label>
+        <div class="topbar-actions">
+          <a routerLink="/notifications/unread" class="bell" aria-label="Notificaciones">
+            <span aria-hidden="true">♢</span><i></i>
+          </a>
+          <button type="button" class="help" aria-label="Ayuda" (click)="notify('Centro de ayuda próximamente')">?</button>
+          <span class="topbar-divider"></span>
+          <div class="topbar-user"><span class="avatar">LM</span><b>Laura Martinez</b></div>
+        </div>
+      </header>
+
+      @if (mobileNavOpen()) {
+        <div class="mobile-nav">
+          @for (section of availableSections(); track section.title) {
+            <p class="mobile-nav-section">{{ section.title }}</p>
+            @for (item of section.items; track item.label) {
+              <div class="mobile-nav-group">
+                <a [routerLink]="item.children[0].href" [class.active]="isActiveItem(item.label)" (click)="openNav(item.label)">
+                  <span class="nav-icon">{{ item.icon }}</span>{{ item.label }}
+                </a>
+                <button type="button" (click)="toggleNav(item.label)" [attr.aria-label]="'Mostrar ' + item.label">
+                  {{ isExpanded(item.label) ? '⌃' : '⌄' }}
+                </button>
+              </div>
+              @if (isExpanded(item.label)) {
+                <div class="mobile-nav-children">
+                  @for (child of item.children; track child.href) {
+                    <a [routerLink]="child.href" [class.active]="isActiveChild(child.href)" (click)="openNav(item.label)">{{ child.label }}</a>
+                  }
+                </div>
+              }
+            }
+          }
+        </div>
+      }
+
+      <router-outlet></router-outlet>
+    </section>
+
+    @if (toast()) {
+      <div class="toast" role="status">{{ toast() }}</div>
+    }
+
+    <div class="assistant">
+      @if (chatOpen()) {
+        <div class="assistant-panel">
+          <div class="assistant-heading">
+            <div><span class="assistant-spark">✦</span><h2>Nexo AI</h2></div>
+            <button type="button" (click)="chatOpen.set(false)" aria-label="Cerrar asistente">×</button>
+          </div>
+          <p>Pregunta sobre documentos, revisiones o permisos.</p>
+          <div class="assistant-prompt">¿En qué puedo ayudarte hoy?</div>
+          <button type="button" (click)="notify('Conversación iniciada')">Iniciar conversación</button>
+        </div>
+      }
+      <button type="button" class="assistant-button" (click)="chatOpen.set(!chatOpen())">
+        <span>✦</span><b>Nexo AI</b>
+      </button>
+    </div>
+  </main>
+}

@@ -1,13 +1,3 @@
-<!-- BEGIN:nextjs-agent-rules -->
-
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
-
 # Contexto permanente de NexoDocs
 
 Antes de proponer o modificar código, lee íntegramente
@@ -43,12 +33,14 @@ documentadas en el diseño de base de datos; no infieras que existe autenticaci�
 
 ## Estructura vigente (2026-09-15)
 
-La aplicación Next.js está en `frontend/`, con rutas explícitas en
-`frontend/src/app/(workspace)/` y vistas por dominio en `frontend/src/features/`.
-Consulta [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) para localizar cada pantalla.
+La aplicación activa está en `frontend/` y fue migrada a Angular 20 LTS. Las rutas
+se definen en `frontend/src/app/core/routes/app.routes.ts` desde el catálogo
+`frontend/src/app/core/data/nexodocs-data.ts`; el layout principal vive en
+`frontend/src/app/shell/app.html`, `frontend/src/app/shell/app.css` y la pantalla reutilizable
+en `frontend/src/app/features/workspace/workspace-page.ts`. Consulta
+[docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) para localizar cada pantalla.
 Los comandos de raíz delegan al workspace: `pnpm dev`, `pnpm build`,
-`pnpm typecheck` y `pnpm test`. No hay backend implementado. Las guías de Next
-se resuelven desde `frontend/node_modules/next/dist/docs/`.
+`pnpm typecheck` y `pnpm test`. No hay backend implementado.
 
 ## Contraste inicial, anterior a la migración 004 (2026-09-13)
 

@@ -1,150 +1,113 @@
-# Nexodocs — Sistema de Gestión Documental
+# NexoDocs - Sistema de Gestion Documental
 
-Nexodocs es una aplicación web para organizar y controlar documentos de empresas.
+NexoDocs es una aplicacion web para organizar y controlar documentos de empresas,
+clinicas, universidades e instituciones. Esta version sigue siendo un prototipo
+visual: no tiene backend y sus datos son simulados.
 
-Esta versión es un prototipo visual. Incluye una pantalla principal con módulos para documentos, expedientes, flujos de trabajo, usuarios, reportes y configuración.
+## 1. Que necesitas instalar
 
-## 1. Qué necesitas instalar
-
-Antes de abrir el proyecto, instala estas tres herramientas:
-
-1. **Node.js 20 o una versión más nueva**
-   - Descarga: https://nodejs.org
+1. **Node.js 22.12 o superior**
 2. **Visual Studio Code**
-   - Descarga: https://code.visualstudio.com
-3. **pnpm**
-   - pnpm sirve para instalar las librerías del proyecto.
+3. **pnpm 12**
 
-Para instalar pnpm, abre una terminal y escribe:
+Para instalar pnpm:
 
 ```bash
 npm install --global pnpm
 ```
 
-Para comprobar que las herramientas funcionan, escribe:
+## 2. Instalar librerias
 
-```bash
-node --version
-pnpm --version
-```
-
-Si aparecen números de versión, la instalación está lista.
-
-## 2. Descargar y abrir el proyecto
-
-Puedes descargar el proyecto como archivo ZIP desde v0 o copiarlo desde GitHub.
-
-Después:
-
-1. Descomprime el archivo ZIP, si lo descargaste.
-2. Abre Visual Studio Code.
-3. Selecciona **Archivo → Abrir carpeta**.
-4. Elige la carpeta del proyecto.
-5. Abre una terminal desde **Terminal → Nueva terminal**.
-
-## 3. Instalar las librerías
-
-La primera vez, ejecuta este comando dentro de la carpeta del proyecto:
+Desde la raiz del proyecto:
 
 ```bash
 pnpm install
 ```
 
-Este comando lee `package.json` y descarga todo lo necesario.
-
-Debes volver a ejecutar `pnpm install` si el proyecto cambia sus librerías o si aparece un error de dependencias.
-
-## 4. Encender la aplicación
-
-Para iniciar la aplicación en modo desarrollo, ejecuta:
+## 3. Encender la aplicacion
 
 ```bash
 pnpm dev
 ```
 
-Cuando aparezca el mensaje de inicio, abre este enlace en tu navegador:
-
-http://localhost:3000
-
-La aplicación se actualizará automáticamente cuando guardes cambios en el código.
-
-Para apagarla, vuelve a la terminal y presiona:
+Abre:
 
 ```text
-Ctrl + C
+http://localhost:4200
 ```
 
-## 5. Comandos importantes
+Si el puerto esta ocupado:
 
-| Comando | Qué hace |
+```bash
+pnpm dev -- --port 4201
+```
+
+## 4. Comandos importantes
+
+| Comando | Que hace |
 | --- | --- |
-| `pnpm install` | Instala las librerías. |
-| `pnpm dev` | Enciende la aplicación para trabajar en ella. |
-| `pnpm build` | Comprueba que la aplicación pueda prepararse para publicar. |
-| `pnpm typecheck` | Comprueba TypeScript de toda la interfaz. |
-| `pnpm test` | Verifica que el menú y los archivos de rutas coincidan. |
-| `pnpm start` | Enciende la versión preparada para publicar. |
+| `pnpm install` | Instala las dependencias del workspace. |
+| `pnpm dev` | Inicia Angular en modo desarrollo. |
+| `pnpm build` | Compila la app para publicacion. |
+| `pnpm typecheck` | Verifica TypeScript de la interfaz. |
+| `pnpm test` | Verifica el mapa de rutas Angular. |
+| `pnpm start` | Sirve la app con configuracion de produccion. |
 
-## 6. Librerías y herramientas usadas
+## 5. Tecnologia actual
 
-- **Next.js 16:** estructura principal de la aplicación web.
-- **React 19:** permite crear pantallas y elementos interactivos.
-- **TypeScript:** ayuda a detectar errores en el código.
-- **Tailwind CSS 4:** se utiliza para diseñar la interfaz.
-- **shadcn/ui:** ofrece componentes visuales como botones, tarjetas y menús.
-- **Lucide React:** proporciona los iconos del sistema.
-- **Vercel Analytics:** permite medir el uso de la aplicación.
+- **Angular 20 LTS**: framework del frontend.
+- **TypeScript 5.9**: tipado y compilacion.
+- **CSS propio**: conserva el estilo turquesa, blanco y gris claro del prototipo.
+- **pnpm workspaces**: los comandos de raiz delegan a `frontend/`.
+- **PostgreSQL 17 con Docker Compose**: base local documentada en `database/`.
 
-No necesitas instalar cada librería manualmente. El comando `pnpm install` las instala todas.
+La migracion reemplazo Next.js/React como tecnologia activa del frontend.
 
-## 7. Archivos principales
+## 6. Archivos principales
 
-- `frontend/src/app/`: rutas y layouts; cada opción del menú tiene su propio `page.tsx`.
-- `frontend/src/features/`: vistas, datos simulados y componentes de cada dominio.
-- `frontend/src/components/`: componentes visuales reutilizables.
-- `frontend/src/app/globals.css`: colores y estilos generales.
-- `frontend/package.json`: dependencias de la interfaz; la raíz delega los comandos mediante pnpm workspaces.
-- `database/`: scripts, migraciones y pruebas de PostgreSQL.
-- [Mapa de arquitectura y pantallas](docs/ARQUITECTURA.md): qué archivo editar para cada URL.
-- [Operación de la base de datos](database/README.md).
+- `frontend/src/app/core/routes/app.routes.ts`: rutas reales de Angular.
+- `frontend/src/app/core/data/nexodocs-data.ts`: menu, roles, URLs y datos simulados.
+- `frontend/src/app/features/workspace/workspace-page.ts`: pantalla reutilizable del panel.
+- `frontend/src/app/shell/app.html`: shell visual con sidebar, topbar y asistente.
+- `frontend/src/app/shell/app.css`: identidad visual y responsive.
+- `frontend/src/app/features/auth/login-page.ts`: login visual de demostracion.
+- `frontend/src/app/core/config/app.config.ts`: proveedor de Angular Router.
+- `docs/ARQUITECTURA.md`: mapa tecnico del frontend.
+- `database/`: esquemas, migraciones, datos iniciales y pruebas de PostgreSQL.
 
-Por ejemplo, `/documents/new` abre `frontend/src/app/(workspace)/documents/new/page.tsx`.
-Puedes acceder directamente, recargar y navegar con Atrás/Adelante. `/login` conserva su pantalla independiente.
+Ejemplos de URLs:
 
-## 8. Si algo no funciona
+- `/`
+- `/documents/new`
+- `/documents/upload`
+- `/workflows/designer`
+- `/settings/security`
+- `/tenants/branding`
+- `/login`
 
-Primero, detén la aplicación con `Ctrl + C` y ejecuta:
+## 7. Base de datos
+
+La base de datos sigue separada del frontend. No hay conexion directa desde el
+navegador a PostgreSQL.
+
+Para levantar solo PostgreSQL:
 
 ```bash
-pnpm install
-pnpm dev
+docker compose up -d postgres
 ```
 
-Si el puerto 3000 ya está ocupado, utiliza otro puerto:
+La validacion de base de datos se mantiene en:
 
-```bash
-pnpm dev -- --port 3001
+```powershell
+powershell -NoProfile -File database/tests/run.ps1
 ```
 
-Después abre:
+## 8. Estado real del sistema
 
-http://localhost:3001
+Sigue pendiente implementar un backend. Por eso:
 
-Si sigues teniendo problemas, revisa que estés situado dentro de la carpeta correcta del proyecto y que Node.js tenga la versión 20 o superior.
-
-## 9. Angular y Flutter
-
-La versión actual es un prototipo realizado con Next.js y React.
-
-La idea del proyecto es utilizar esta interfaz como referencia para crear posteriormente:
-
-- Una aplicación web con Angular.
-- Una aplicación móvil para Android y iPhone con Flutter.
-- Un sistema multitenant, donde varias empresas puedan utilizar la plataforma con sus datos separados.
-- Un asistente conversacional con inteligencia artificial.
-
-## 10. Continuar trabajando en v0
-
-Este proyecto está conectado a v0. Puedes seguir solicitando cambios desde aquí:
-
-https://v0.app/chat/projects/prj_IBhMxF0QStaLOWwLEdOUX9zFCQlc
+- El login es visual.
+- El rol seleccionado solo filtra el menu.
+- Las acciones muestran comportamiento de demo.
+- Los documentos, usuarios, workflows, auditoria y tenants no se guardan.
+- El frontend no establece contexto `tenant_id` ni `user_id` en PostgreSQL.

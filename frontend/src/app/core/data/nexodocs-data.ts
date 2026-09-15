@@ -1,0 +1,296 @@
+export type Role =
+  | 'Usuario basico'
+  | 'Supervisor'
+  | 'Administrador de tenant'
+  | 'Superadministrador';
+
+export type NavChild = { label: string; href: string };
+export type NavItem = { label: string; icon: string; children: NavChild[]; roles?: Role[] };
+export type NavSection = { title: string; items: NavItem[] };
+export type RouteInfo = { module: string; subcategory: string; href: string };
+export type ScreenCopy = { description: string; action: string };
+export type DemoItem = { title: string; meta: string; date: string; status: string };
+
+export const roles: Role[] = [
+  'Usuario basico',
+  'Supervisor',
+  'Administrador de tenant',
+  'Superadministrador',
+];
+
+export const navSections: NavSection[] = [
+  {
+    title: 'Espacio de trabajo',
+    items: [
+      {
+        label: 'Inicio',
+        icon: 'IN',
+        children: [
+          { label: 'Resumen', href: '/' },
+          { label: 'Actividad reciente', href: '/dashboard/activity' },
+          { label: 'Mis tareas', href: '/dashboard/tasks' },
+          { label: 'Indicadores', href: '/dashboard/indicators' },
+        ],
+      },
+      {
+        label: 'Expedientes',
+        icon: 'EX',
+        children: [
+          { label: 'Todos los expedientes', href: '/expedients' },
+          { label: 'Crear expediente', href: '/expedients/new' },
+          { label: 'Activos', href: '/expedients/active' },
+          { label: 'Cerrados', href: '/expedients/closed' },
+          { label: 'Archivados', href: '/expedients/archived' },
+        ],
+      },
+      {
+        label: 'Documentos',
+        icon: 'DO',
+        children: [
+          { label: 'Todos los documentos', href: '/documents' },
+          { label: 'Nuevo documento', href: '/documents/new' },
+          { label: 'Subir archivo', href: '/documents/upload' },
+          { label: 'Mis documentos', href: '/documents/mine' },
+          { label: 'Compartidos conmigo', href: '/documents/shared' },
+          { label: 'Recientes', href: '/documents/recent' },
+          { label: 'Pendientes', href: '/documents/pending' },
+          { label: 'En revision', href: '/documents/in-review' },
+          { label: 'Aprobados', href: '/documents/approved' },
+          { label: 'Archivados', href: '/documents/archived' },
+          { label: 'Papelera', href: '/documents/trash' },
+        ],
+      },
+      {
+        label: 'Digitalizacion',
+        icon: 'DG',
+        roles: ['Administrador de tenant', 'Superadministrador'],
+        children: [
+          { label: 'Escanear documento', href: '/digitization' },
+          { label: 'Subir documento', href: '/digitization/upload' },
+          { label: 'Procesamiento OCR', href: '/digitization/ocr' },
+          { label: 'Validacion', href: '/digitization/validation' },
+          { label: 'Indexacion', href: '/digitization/indexing' },
+          { label: 'Correccion de metadatos', href: '/digitization/metadata' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Procesos',
+    items: [
+      {
+        label: 'Workflows',
+        icon: 'WF',
+        children: [
+          { label: 'Todos los workflows', href: '/workflows' },
+          { label: 'Mis tareas', href: '/workflows/tasks' },
+          { label: 'Pendientes de revision', href: '/workflows/pending-review' },
+          { label: 'Pendientes de aprobacion', href: '/workflows/pending-approval' },
+          { label: 'Activos', href: '/workflows/active' },
+          { label: 'Finalizados', href: '/workflows/completed' },
+          { label: 'Plantillas', href: '/workflows/templates' },
+          { label: 'Disenador', href: '/workflows/designer' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Gestion',
+    items: [
+      {
+        label: 'Usuarios y equipos',
+        icon: 'US',
+        roles: ['Administrador de tenant', 'Superadministrador'],
+        children: [
+          { label: 'Todos los usuarios', href: '/users' },
+          { label: 'Crear usuario', href: '/users/new' },
+          { label: 'Activos', href: '/users/active' },
+          { label: 'Bloqueados', href: '/users/blocked' },
+          { label: 'Roles', href: '/users/roles' },
+          { label: 'Permisos', href: '/users/permissions' },
+          { label: 'Areas', href: '/users/areas' },
+          { label: 'Grupos', href: '/users/groups' },
+        ],
+      },
+      {
+        label: 'Auditoria',
+        icon: 'AU',
+        roles: ['Administrador de tenant', 'Superadministrador'],
+        children: [
+          { label: 'Registro general', href: '/audit' },
+          { label: 'Accesos', href: '/audit/access' },
+          { label: 'Creacion de documentos', href: '/audit/document-creation' },
+          { label: 'Modificaciones', href: '/audit/modifications' },
+          { label: 'Descargas', href: '/audit/downloads' },
+          { label: 'Aprobaciones', href: '/audit/approvals' },
+          { label: 'Eliminaciones', href: '/audit/deletions' },
+          { label: 'Cambios de permisos', href: '/audit/permissions' },
+        ],
+      },
+      {
+        label: 'Reportes',
+        icon: 'RP',
+        children: [
+          { label: 'Documentos', href: '/reports' },
+          { label: 'Usuarios', href: '/reports/users' },
+          { label: 'Workflows', href: '/reports/workflows' },
+          { label: 'Almacenamiento', href: '/reports/storage' },
+          { label: 'Auditoria', href: '/reports/audit' },
+          { label: 'Productividad', href: '/reports/productivity' },
+          { label: 'Actividad por area', href: '/reports/by-area' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Sistema',
+    items: [
+      {
+        label: 'Notificaciones',
+        icon: 'NT',
+        children: [
+          { label: 'Todas', href: '/notifications' },
+          { label: 'No leidas', href: '/notifications/unread' },
+          { label: 'Tareas', href: '/notifications/tasks' },
+          { label: 'Aprobaciones', href: '/notifications/approvals' },
+          { label: 'Menciones', href: '/notifications/mentions' },
+        ],
+      },
+      {
+        label: 'Configuracion',
+        icon: 'CF',
+        roles: ['Administrador de tenant', 'Superadministrador'],
+        children: [
+          { label: 'General', href: '/settings' },
+          { label: 'Tipos documentales', href: '/settings/document-types' },
+          { label: 'Estados', href: '/settings/statuses' },
+          { label: 'Metadatos', href: '/settings/metadata' },
+          { label: 'Etiquetas', href: '/settings/tags' },
+          { label: 'Plantillas', href: '/settings/templates' },
+          { label: 'Retencion', href: '/settings/retention' },
+          { label: 'Seguridad', href: '/settings/security' },
+          { label: 'Apariencia', href: '/settings/appearance' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Administracion global',
+    items: [
+      {
+        label: 'Tenants',
+        icon: 'TN',
+        roles: ['Superadministrador'],
+        children: [
+          { label: 'Todos los tenants', href: '/tenants' },
+          { label: 'Crear tenant', href: '/tenants/new' },
+          { label: 'Activos', href: '/tenants/active' },
+          { label: 'Suspendidos', href: '/tenants/suspended' },
+          { label: 'Planes', href: '/tenants/plans' },
+          { label: 'Uso de almacenamiento', href: '/tenants/storage' },
+          { label: 'Branding', href: '/tenants/branding' },
+        ],
+      },
+    ],
+  },
+];
+
+export const navigationRoutes: RouteInfo[] = navSections.flatMap((section) =>
+  section.items.flatMap((item) =>
+    item.children.map((child) => ({
+      module: item.label,
+      subcategory: child.label,
+      href: child.href,
+    })),
+  ),
+);
+
+export const documents: DemoItem[] = [
+  { title: 'Politica de seguridad de la informacion', meta: 'DOC-2041 - PDF - Maria Gonzalez', date: 'Hoy, 09:42', status: 'Aprobado' },
+  { title: 'Contrato marco proveedores 2025', meta: 'DOC-2042 - DOCX - Carlos Mendez', date: 'Ayer, 16:18', status: 'En revision' },
+  { title: 'Informe auditoria interna Q2', meta: 'DOC-2043 - XLSX - Javier Ruiz', date: '10 jun 2025', status: 'Pendiente' },
+  { title: 'Manual de incorporacion', meta: 'DOC-2044 - PDF - Ana Lopez', date: '08 jun 2025', status: 'Archivado' },
+];
+
+export const expedients: DemoItem[] = [
+  { title: 'EXP-2041 - Alta de proveedor Andes', meta: 'Administrativo - Compras - 12 documentos', date: 'Actualizado hoy', status: 'Activo' },
+  { title: 'EXP-2038 - Renovacion contractual', meta: 'Contractual - Legal - 8 documentos', date: '12 jun 2025', status: 'Activo' },
+  { title: 'EXP-2014 - Auditoria interna Q2', meta: 'Auditoria - Calidad - 24 documentos', date: '31 may 2025', status: 'Cerrado' },
+  { title: 'EXP-1982 - Proyecto sede norte', meta: 'Proyecto - Operaciones - 17 documentos', date: '18 abr 2025', status: 'Archivado' },
+];
+
+export const workflows: DemoItem[] = [
+  { title: 'Aprobacion de contratos', meta: 'Contrato marco proveedores - Etapa 2 de 4', date: 'Vence manana', status: 'En revision' },
+  { title: 'Alta de proveedor', meta: 'EXP-2041 - Responsable: Laura Martinez', date: 'Vence en 3 dias', status: 'Pendiente' },
+  { title: 'Revision trimestral', meta: 'Informe auditoria interna Q2 - 4 etapas', date: 'Finalizado 10 jun', status: 'Completado' },
+  { title: 'Publicacion de politicas', meta: 'Politica de seguridad - Etapa 3 de 3', date: 'Finalizado hoy', status: 'Completado' },
+];
+
+export const users: DemoItem[] = [
+  { title: 'Laura Martinez', meta: 'laura@acme.com - Administradora - Direccion', date: 'Hace 4 min', status: 'Activo' },
+  { title: 'Carlos Mendez', meta: 'carlos@acme.com - Supervisor - Legal', date: 'Hoy, 08:31', status: 'Activo' },
+  { title: 'Ana Lopez', meta: 'ana@acme.com - Usuario operativo - Archivo', date: 'Ayer, 17:20', status: 'Activo' },
+  { title: 'Javier Ruiz', meta: 'javier@acme.com - Auditor - Calidad', date: 'Bloqueado ayer', status: 'Bloqueado' },
+];
+
+export const tenants: DemoItem[] = [
+  { title: 'Acme Consulting', meta: 'acme.nexodocs.app - Empresarial - 42 usuarios', date: '6.8 GB de 10 GB', status: 'Activo' },
+  { title: 'Clinica Central', meta: 'clinica.nexodocs.app - Profesional - 86 usuarios', date: '14.2 GB de 25 GB', status: 'Activo' },
+  { title: 'Universidad del Valle', meta: 'univalle.nexodocs.app - Empresarial - 124 usuarios', date: '31.6 GB de 50 GB', status: 'Activo' },
+  { title: 'Grupo Norte', meta: 'gruponorte.nexodocs.app - Basico - 8 usuarios', date: '2.1 GB de 5 GB', status: 'Suspendido' },
+];
+
+export function screenCopy(route: RouteInfo): ScreenCopy {
+  const action = route.subcategory.includes('Crear') || route.subcategory.includes('Nuevo')
+    ? route.subcategory
+    : route.subcategory.includes('Subir')
+      ? 'Seleccionar archivo'
+      : route.module === 'Reportes' || route.module === 'Auditoria'
+        ? 'Exportar'
+        : route.module === 'Configuracion'
+          ? 'Guardar cambios'
+          : 'Nueva accion';
+
+  return {
+    action,
+    description: descriptions[`${route.module}|${route.subcategory}`] ??
+      'Gestiona la operacion de tu organizacion desde este espacio.',
+  };
+}
+
+export function demoList(module: string): DemoItem[] {
+  if (module === 'Documentos' || module === 'Digitalizacion') return documents;
+  if (module === 'Expedientes') return expedients;
+  if (module === 'Workflows') return workflows;
+  if (module === 'Usuarios y equipos') return users;
+  if (module === 'Tenants') return tenants;
+  if (module === 'Notificaciones') return workflows.slice(0, 3);
+  return documents;
+}
+
+export function routeFor(module: string, subcategory?: string): string {
+  const route = navigationRoutes.find(
+    (item) => item.module === module && (!subcategory || item.subcategory === subcategory),
+  );
+  if (!route) throw new Error(`Ruta no definida: ${module} / ${subcategory}`);
+  return route.href;
+}
+
+const descriptions: Record<string, string> = {
+  'Inicio|Actividad reciente': 'Consulta los ultimos movimientos realizados dentro de la organizacion.',
+  'Inicio|Mis tareas': 'Prioriza revisiones, aprobaciones y validaciones asignadas a tu usuario.',
+  'Inicio|Indicadores': 'Analiza el rendimiento documental y operativo del tenant actual.',
+  'Documentos|Todos los documentos': 'Repositorio central del tenant con trazabilidad, permisos y control de versiones.',
+  'Documentos|Nuevo documento': 'Crea un documento desde cero o a partir de una plantilla institucional.',
+  'Documentos|Subir archivo': 'Incorpora archivos y completa sus datos de clasificacion.',
+  'Expedientes|Todos los expedientes': 'Consulta las unidades documentales y casos registrados en la organizacion.',
+  'Expedientes|Crear expediente': 'Registra una unidad documental para agrupar documentos, participantes y procesos.',
+  'Digitalizacion|Procesamiento OCR': 'Supervisa la extraccion de texto y el nivel de confianza de cada lote.',
+  'Workflows|Disenador': 'Disena visualmente las etapas y decisiones de un flujo documental.',
+  'Usuarios y equipos|Permisos': 'Controla que acciones puede realizar cada rol sobre los modulos del sistema.',
+  'Auditoria|Registro general': 'Historico inmutable de acciones relevantes realizadas dentro del tenant.',
+  'Reportes|Documentos': 'Distribucion documental por estado, tipo, area y periodo.',
+  'Notificaciones|No leidas': 'Notificaciones nuevas que todavia requieren tu atencion.',
+  'Configuracion|General': 'Datos institucionales y preferencias generales de Acme Consulting.',
+  'Tenants|Todos los tenants': 'Administra las organizaciones aisladas registradas en la plataforma.',
+};
