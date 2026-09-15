@@ -1,5 +1,13 @@
+> Actualización de estructura (2026-09-15): la interfaz Next.js está en `frontend/`.
+> Cada sección tiene una URL y un `page.tsx` en `frontend/src/app/(workspace)/`;
+> las vistas reutilizables están en `frontend/src/features/`. Consulta
+> [la arquitectura y el mapa de pantallas](ARQUITECTURA.md). Los comandos
+> `pnpm dev`, `pnpm build`, `pnpm typecheck` y `pnpm test` se ejecutan desde la raíz.
+> Las referencias a `app/page.tsx` y `components/module-content.tsx` del documento
+> original describen la estructura anterior; el frontend sigue siendo una demo.
+
 > Actualización de implementación (2026-09-14): consulta también
-> [el diseño y operación de la base de datos](../database/DISEÑO_Y_OPERACION.md)
+> [el diseño y operación de la base de datos](database/DISEÑO_Y_OPERACION.md)
 > y [sus instrucciones de migración y pruebas](../database/README.md).
 > La migración 004 refuerza el estado inicial descrito a continuación. Los principios
 > del producto se mantienen; el frontend sigue sin backend ni persistencia.

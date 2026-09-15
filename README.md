@@ -81,6 +81,8 @@ Ctrl + C
 | `pnpm install` | Instala las librerías. |
 | `pnpm dev` | Enciende la aplicación para trabajar en ella. |
 | `pnpm build` | Comprueba que la aplicación pueda prepararse para publicar. |
+| `pnpm typecheck` | Comprueba TypeScript de toda la interfaz. |
+| `pnpm test` | Verifica que el menú y los archivos de rutas coincidan. |
 | `pnpm start` | Enciende la versión preparada para publicar. |
 
 ## 6. Librerías y herramientas usadas
@@ -97,10 +99,17 @@ No necesitas instalar cada librería manualmente. El comando `pnpm install` las 
 
 ## 7. Archivos principales
 
-- `app/page.tsx`: contiene la pantalla principal y los módulos del panel.
-- `app/globals.css`: contiene los colores, tamaños y estilos generales.
-- `app/layout.tsx`: contiene la estructura general y la información de la página.
-- `package.json`: contiene las librerías y los comandos del proyecto.
+- `frontend/src/app/`: rutas y layouts; cada opción del menú tiene su propio `page.tsx`.
+- `frontend/src/features/`: vistas, datos simulados y componentes de cada dominio.
+- `frontend/src/components/`: componentes visuales reutilizables.
+- `frontend/src/app/globals.css`: colores y estilos generales.
+- `frontend/package.json`: dependencias de la interfaz; la raíz delega los comandos mediante pnpm workspaces.
+- `database/`: scripts, migraciones y pruebas de PostgreSQL.
+- [Mapa de arquitectura y pantallas](docs/ARQUITECTURA.md): qué archivo editar para cada URL.
+- [Operación de la base de datos](database/README.md).
+
+Por ejemplo, `/documents/new` abre `frontend/src/app/(workspace)/documents/new/page.tsx`.
+Puedes acceder directamente, recargar y navegar con Atrás/Adelante. `/login` conserva su pantalla independiente.
 
 ## 8. Si algo no funciona
 

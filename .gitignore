@@ -17,3 +17,6 @@ node_modules
 
 # Local database dumps can contain private data.
 database/backups/
+
+# TypeScript incremental build cache
+*.tsbuildinfo

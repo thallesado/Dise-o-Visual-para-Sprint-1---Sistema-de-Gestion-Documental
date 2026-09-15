@@ -29,7 +29,7 @@ los cambios, las verificaciones realizadas y las limitaciones reales.
 
 ## Estado vigente de base de datos (2026-09-14)
 
-Antes de cambiar SQL, lee también [database/DISEÑO_Y_OPERACION.md](database/DISEÑO_Y_OPERACION.md)
+Antes de cambiar SQL, lee también [docs/database/DISEÑO_Y_OPERACION.md](docs/database/DISEÑO_Y_OPERACION.md)
 y [database/README.md](database/README.md). La migración `004_saas_hardening` añade
 RBAC y contexto de usuario a RLS, integridad de versiones y workflows, auditoría
 automática e índices. Conserva los 49 modelos públicos y las 45 tablas con RLS.
@@ -40,6 +40,15 @@ como migraciones nuevas. No edites 004 una vez aplicada. Valida mediante
 Las consultas del backend necesitan `app.tenant_id` y `app.user_id` autenticados.
 El frontend sigue simulado. Las limitaciones y responsabilidades pendientes están
 documentadas en el diseño de base de datos; no infieras que existe autenticación.
+
+## Estructura vigente (2026-09-15)
+
+La aplicación Next.js está en `frontend/`, con rutas explícitas en
+`frontend/src/app/(workspace)/` y vistas por dominio en `frontend/src/features/`.
+Consulta [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) para localizar cada pantalla.
+Los comandos de raíz delegan al workspace: `pnpm dev`, `pnpm build`,
+`pnpm typecheck` y `pnpm test`. No hay backend implementado. Las guías de Next
+se resuelven desde `frontend/node_modules/next/dist/docs/`.
 
 ## Contraste inicial, anterior a la migración 004 (2026-09-13)
 

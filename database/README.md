@@ -5,7 +5,7 @@ PostgreSQL 17 para el SaaS multitenant de gestión documental. El dominio mantie
 `app.schema_migrations`. El módulo clínico permanece separado del núcleo documental.
 
 Las decisiones, el contrato para el futuro backend y los límites están en
-[DISEÑO_Y_OPERACION.md](DISEÑO_Y_OPERACION.md).
+[DISEÑO_Y_OPERACION.md](../docs/database/DISEÑO_Y_OPERACION.md).
 
 ## Iniciar una instalación local nueva
 
